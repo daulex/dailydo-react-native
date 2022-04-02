@@ -1,7 +1,21 @@
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import Icon from "../Shared/Icon/Icon";
+import {useState} from "react";
+import FloatingMenu from "./FloatingMenu";
 
 const Header = () => {
+    const [floatingMenuShowing, setFloatingMenuShowing] = useState(false);
+    // const handleMenuClick = () => {
+    //     setFloatingMenuShowing(true);
+    // }
+    const links = [
+        {
+            to: "/my-account",
+            label: "My account"
+        }
+    ];
+
+
     return(
         <View style={styles.container}>
             <TouchableOpacity style={styles.buttonLogo} onPress={()=>{alert("you clicked me")}}>
@@ -11,9 +25,10 @@ const Header = () => {
             <TouchableOpacity style={styles.buttonNav} onPress={()=>{alert("you clicked me")}}>
                 <Icon name="plus-square" size="23" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonNav} onPress={()=>{alert("you clicked me")}}>
+            <TouchableOpacity style={styles.buttonNav} onPress={()=>setFloatingMenuShowing(true)}>
                 <Icon name="menu" size="23" />
             </TouchableOpacity>
+            {floatingMenuShowing && <FloatingMenu links={links} setFloatingMenuShowing={setFloatingMenuShowing} />}
         </View>
     );
 }
@@ -27,7 +42,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: "100%",
         paddingHorizontal: 20,
-        paddingVertical: 20
+        paddingVertical: 20,
+        position: "relative"
     },
     buttonLogo: {
         backgroundColor: 'transparent',
