@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         paddingTop: 60,
         position: "absolute",
         top: 10,
-        right: 10
+        right: 3
     },
     menuToggle: {
         position:"absolute",

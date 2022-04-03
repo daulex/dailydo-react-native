@@ -2,6 +2,7 @@ import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import Icon from "../Shared/Icon/Icon";
 import {useState} from "react";
 import FloatingMenu from "./FloatingMenu";
+import {Link} from "react-router-native";
 
 const Header = () => {
     const [floatingMenuShowing, setFloatingMenuShowing] = useState(false);
@@ -18,13 +19,13 @@ const Header = () => {
 
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.buttonLogo} onPress={()=>{alert("you clicked me")}}>
+            <Link style={styles.buttonLogo} to="/" underlayColor="rgba(255,255,255,0)">
                 <Image style={styles.logo} source={require("../../assets/dailydo-logo.png")}/>
-            </TouchableOpacity>
+            </Link>
 
-            <TouchableOpacity style={styles.buttonNav} onPress={()=>{alert("you clicked me")}}>
+            <Link style={styles.buttonNav} underlayColor="rgba(255,255,255,0)" to="/new-goal">
                 <Icon name="plus-square" size="23" />
-            </TouchableOpacity>
+            </Link>
             <TouchableOpacity style={styles.buttonNav} onPress={()=>setFloatingMenuShowing(true)}>
                 <Icon name="menu" size="23" />
             </TouchableOpacity>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        width: "100%",
+        maxHeight: 60,
         paddingHorizontal: 20,
         paddingVertical: 20,
         position: "relative"
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
     },
     buttonNav: {
         backgroundColor: 'transparent',
-        width: 30,
-        height: 30,
+        width: 23,
+        height: 23,
         marginLeft: 20
     },
     logo: {
