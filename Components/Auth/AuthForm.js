@@ -49,40 +49,29 @@ const AuthForm = ({action, actions, processAuth}) => {
     const inputsToRender = actions[action].inputs;
 
     return (
-        <View>
-
-                {inputsToRender.map((fieldRef, i) => (
-                    // <div className={'field-type-' + inputData[fieldRef].type} id={inputData[fieldRef].name} key={"field-"+i}>
-                    //     <label htmlFor={inputData[fieldRef].name}>{inputData[fieldRef].label}</label>
-                    //     <input
-                    //         type={inputData[fieldRef].type}
-                    //         placeholder={inputData[fieldRef].placeholder}
-                    //         name={inputData[fieldRef].name}
-                    //         disabled={inputData[fieldRef].disabled}
-                    //         {...register(inputData[fieldRef].name, inputData[fieldRef].validation)}
-                    //     />
-                    // </div>
-                    <View>
-                        <Text>{inputData[fieldRef].label}</Text>
-                        <Controller
-                            control={control}
-                            rules={{
-                                required: true,
-                            }}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <TextInput
-                                    style={styles.input}
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    disabled={inputData[fieldRef].disabled}
-                                    placeholder={inputData[fieldRef].placeholder}
-                                />
-                            )}
-                            name={inputData[fieldRef].name}
+        <View style={styles.formContainer}>
+        {inputsToRender.map((fieldRef, i) => (
+            <View style={styles.inputContainer} key={i}>
+                <Text>{inputData[fieldRef].label}</Text>
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                            disabled={inputData[fieldRef].disabled}
+                            placeholder={inputData[fieldRef].placeholder}
                         />
-                    </View>
-                        ))}
+                    )}
+                    name={inputData[fieldRef].name}
+                />
+            </View>
+            ))}
 
             <Button title={actions[action].buttonLabel} onPress={handleSubmit(onSubmit)} />
         </View>
@@ -91,10 +80,16 @@ const AuthForm = ({action, actions, processAuth}) => {
 export default AuthForm;
 
 const styles = StyleSheet.create({
+    formContainer: {
+        zIndex: 1,
+    },
+    inputContainer: {
+        marginBottom: 10
+    },
     input: {
         borderColor: "#000",
         borderWidth: 1,
-        marginBottom: 20,
+        marginBottom: 10,
         padding: 10
     },
 });

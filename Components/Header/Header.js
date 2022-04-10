@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         maxHeight: 60,
         paddingHorizontal: 20,
         paddingVertical: 20,
-        position: "relative"
+        position: "relative",
+        zIndex: 999
     },
     buttonLogo: {
         backgroundColor: 'transparent',

@@ -1,19 +1,25 @@
-import {Link} from "react-router-native";
-import {View, Text} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
+import TextLinkEl from "../Shared/TextLinkEl";
 
 const AuthMenu = ({actions, action}) => {
 
     const menuItems = actions;
     delete menuItems.reset;
     delete menuItems.verify;
+    const getNavActiveStyle = (isActive) => {
+        console.log("is active: ", isActive);
+    }
 
     return(
 
-        <View>
+        <View style={styles.nav}>
             {Object.keys(menuItems).map((key) => (
-                <Link key={key} to={"/user/" + actions[key].name} className={({ isActive }) => {
-                    return isActive || (action === 'login' && actions[key].name === 'login') ? "active" : "";
-                }}><Text>{actions[key].title}</Text></Link>
+                <TextLinkEl 
+                    key={key} 
+                    to={"/user/" + actions[key].name} 
+                    text={actions[key].title}
+                    styles={styles}
+                    /> 
             ))}
         </View>
 
@@ -21,3 +27,30 @@ const AuthMenu = ({actions, action}) => {
 
 }
 export default AuthMenu;
+
+const styles = StyleSheet.create({
+    nav: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    linkContainer: {
+        padding: 10,
+        marginHorizontal: 2
+    },
+    linkText: {
+        color: "#888",
+        fontSize: 16
+    },
+    linkContainerActive: {
+        padding: 10,
+        backgroundColor: "#333",
+        borderRadius: 5,
+        marginHorizontal: 2
+    },
+    linkTextActive: {
+        color: "#fff",
+        fontSize: 16
+    }
+});

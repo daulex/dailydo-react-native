@@ -51,9 +51,10 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 10,
         right: 3
+
     },
     menuToggle: {
-        position:"absolute",
+        position: "absolute",
         top: 10,
         right: 10,
         width: 30,

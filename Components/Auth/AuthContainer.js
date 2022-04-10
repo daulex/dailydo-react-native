@@ -3,7 +3,7 @@ import AuthMenu from './AuthMenu';
 import AuthForm from './AuthForm';
 import {Context} from "./UserContext";
 import axios from "axios";
-import {View, Text} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 
 const AuthContainer = ({action}) => {
 
@@ -110,11 +110,10 @@ const AuthContainer = ({action}) => {
 
 
     return (
-        <View>
+        <View style={styles.container}>
             {!['reset','verify'].includes(action)  &&
-                <AuthMenu setCurrentAction={setCurrentAction} action={action} actions={actions} />
+                <AuthMenu style={styles.nav} setCurrentAction={setCurrentAction} action={action} actions={actions} />
             }
-            <Text>{action}</Text>
             {errorMessage && <Text>{errorMessage}</Text>}
             {successMessage ? <Text>{successMessage}</Text> :
                 <AuthForm processAuth={processAuth} action={action} actions={actions} submitLabel={submitLabel} processing={processing} />
@@ -123,3 +122,9 @@ const AuthContainer = ({action}) => {
     );
 }
 export default AuthContainer;
+
+const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 15,
+    }
+});
