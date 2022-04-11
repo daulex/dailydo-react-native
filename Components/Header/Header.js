@@ -20,7 +20,7 @@ const Header = () => {
     return(
         <View style={styles.container}>
             <Link style={styles.buttonLogo} to="/" underlayColor="rgba(255,255,255,0)">
-                <Image style={styles.logo} source={require("../../assets/dailydo-logo.png")}/>
+                <Image style={styles.logo} source={require("../../assets/images/dailydo-logo.png")}/>
             </Link>
 
             <Link style={styles.buttonNav} underlayColor="rgba(255,255,255,0)" to="/new-goal">

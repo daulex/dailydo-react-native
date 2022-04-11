@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        paddingBottom: 10,
     },
     linkContainer: {
         padding: 10,
