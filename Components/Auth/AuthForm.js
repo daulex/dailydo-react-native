@@ -2,13 +2,15 @@ import React from 'react';
 import {View, Text, TextInput, Button, StyleSheet} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { inputData } from './_inputData';
+import SubmitButtonEl from '../Shared/SubmitButtonEl/SubmitButtonEl';
 
 const AuthForm = ({action, actions, processAuth}) => {
     const formOptions = {};
 
     const { control, handleSubmit, formState: { errors }  } = useForm(formOptions);
     const onSubmit = data => {
-        processAuth(data);
+        // processAuth(data);
+        console.log(data);
     };
     
     const inputsToRender = actions[action].inputs;
@@ -49,8 +51,7 @@ const AuthForm = ({action, actions, processAuth}) => {
                 </View>
                 )
         })}
-
-            <Button title={actions[action].buttonLabel} onPress={handleSubmit(onSubmit)} />
+            <SubmitButtonEl label={actions[action].buttonLabel} callback={handleSubmit(onSubmit)} />
         </View>
     );
 }
