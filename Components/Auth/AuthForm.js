@@ -8,12 +8,22 @@ const AuthForm = ({action, actions, processAuth}) => {
     const formOptions = {};
 
     const { control, handleSubmit, formState: { errors }  } = useForm(formOptions);
-    const onSubmit = data => {
-        // processAuth(data);
-        console.log(data);
-    };
     
     const inputsToRender = actions[action].inputs;
+
+    const onSubmit = data => {
+        let undefindedFound = false;
+        inputsToRender.map(key => {
+            if(typeof data[key] === 'undefined' || !data[key].length){
+                undefindedFound = true;
+            }
+        });
+        if(undefindedFound) return;
+
+        processAuth(data);
+    };
+    
+    
     return (
         <View style={styles.formContainer}>
             

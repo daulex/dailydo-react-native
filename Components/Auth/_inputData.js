@@ -1,5 +1,5 @@
 export const inputData = {
-    email: {
+    username: {
         name: "username",
         type: "email",
         label: "Email",

@@ -1,15 +1,18 @@
 import React, {useState, useContext, useEffect} from 'react';
 import AuthMenu from './AuthMenu';
 import AuthForm from './AuthForm';
-import {Context} from "./UserContext";
+// import {Context} from "./UserContext";
 import axios from "axios";
 import {View, Text, StyleSheet} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const AuthContainer = ({action}) => {
 
     const [activeUser, setActiveUser] = useState(null);
     if(activeUser){
-        window.location = "/";
+        console.log(activeUser);
+        // TODO: add last "refreshed" timestamp
     }
     const [successMessage, setSuccessMessage] = useState(null );
     const [errorMessage, setErrorMessage] = useState("noew" );
@@ -27,19 +30,19 @@ const AuthContainer = ({action}) => {
             name: "login",
             title: "Log in",
             buttonLabel: "Log in",
-            inputs: ["email", "password"]
+            inputs: ["username", "password"]
         },
         register: {
             name: "register",
             title: "Register",
             buttonLabel: "Register",
-            inputs: ["email", "password", "password_confirm"]
+            inputs: ["username", "password", "password_confirm"]
         },
         recover: {
             name: "recover",
             title: "Recover",
             buttonLabel: "Request reset link",
-            inputs: ["email"]
+            inputs: ["username"]
         },
         reset: {
             name: "reset",
@@ -60,18 +63,20 @@ const AuthContainer = ({action}) => {
 
         if(action === "login" || forceAction === "login"){
 
-            axios.post('wp-json/jwt-auth/v1/token', data)
+            axios.post('https://dailydo.lv/a/wp-json/jwt-auth/v1/token', data)
                 .then(function (response) {
+                    console.log(response);
                     if(typeof response.data !== undefined && typeof response.data.token !== undefined){
-                        localStorage.setItem('token', response.data.token);
+                        
+                        AsyncStorage.setItem('token', response.data.token);
                         setActiveUser(response.data.token);
-                        setTimeout(function(){
-                            // window.location.assign("/");
-                        }, 100);
+                        // setTimeout(function(){
+                        //     // window.location.assign("/");
+                        // }, 100);
                     }
                 })
                 .catch(function () {
-                    setErrorMessage("Something went wrong, please try again.")
+                    setErrorMessage("Something went wrong, please try again.");
                 });
 
 
