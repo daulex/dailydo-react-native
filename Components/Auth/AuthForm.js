@@ -13,6 +13,7 @@ const AuthForm = ({action, actions, processAuth}) => {
 
     const onSubmit = data => {
         let undefindedFound = false;
+        
         inputsToRender.map(key => {
             if(typeof data[key] === 'undefined' || !data[key].length){
                 undefindedFound = true;
@@ -32,6 +33,7 @@ const AuthForm = ({action, actions, processAuth}) => {
             let error = false;
             if(errors[name]) {
                 error = errors[name].message;
+                console.log(errors);
             }
             return(
                 <View style={styles.inputContainer} key={i}>

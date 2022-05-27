@@ -4,14 +4,19 @@ import AuthForm from './AuthForm';
 // import {Context} from "./UserContext";
 import axios from "axios";
 import {View, Text, StyleSheet} from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MMKV } from 'react-native-mmkv';
+export const storage = new MMKV();
 
 const AuthContainer = ({action}) => {
 
     const [activeUser, setActiveUser] = useState(null);
+    
     if(activeUser){
-        console.log(activeUser);
+        // console.log(activeUser);
+        const token = storage.getString('user.token');
+        // const token = AsyncStorage.getItem('token');
+        console.log(token);
         // TODO: add last "refreshed" timestamp
     }
     const [successMessage, setSuccessMessage] = useState(null );
@@ -65,10 +70,11 @@ const AuthContainer = ({action}) => {
 
             axios.post('https://dailydo.lv/a/wp-json/jwt-auth/v1/token', data)
                 .then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(typeof response.data !== undefined && typeof response.data.token !== undefined){
                         
-                        AsyncStorage.setItem('token', response.data.token);
+                        // AsyncStorage.setItem('token', response.data.token);
+                        storage.set('user.token', response.data.token);
                         setActiveUser(response.data.token);
                         // setTimeout(function(){
                         //     // window.location.assign("/");
